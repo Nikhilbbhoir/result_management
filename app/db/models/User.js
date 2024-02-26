@@ -4,7 +4,7 @@ const UserSchema = new mongoose.Schema({
     name:{type:String, required:true},
     fathername:{type:String, required:true},
     school:{type:String, required:true},
-    class:{type:String, required:true},
+    className:{type:String, required:true},
     roll:{type:Number, required:true},
     email:{type:String, unique:true, required:true},
     contact:{type:String, unique:true, required:true},

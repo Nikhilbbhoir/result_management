@@ -1,7 +1,17 @@
 import React from 'react'
+import ManageUsers from '../components/ManageUser'
 
-export const page = () => {
+const page = () => {
   return (
-    <div>page</div>
+    <div className="container mx-auto">
+    {/* Display appropriate message if unauthorized */}
+    {/* Render ManageUsers component if authorized */}
+    {/* {isAuthenticated ?
+
+     : <p>Unauthorized access.</p>} */}
+     <ManageUsers />
+  </div>
   )
 }
+
+export default page

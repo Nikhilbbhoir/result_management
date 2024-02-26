@@ -1,7 +1,10 @@
 import React from 'react'
+import AdminPanel from './components/AdminTable'
 
-export const page = () => {
+const page = () => {
   return (
-    <div>page</div>
+    <AdminPanel />
   )
 }
+
+export default page
