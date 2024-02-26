@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import Form from '../../components/ResultForm';
 
-const page = () => {
+const Page = () => {
   const [users, setUsers] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -42,7 +42,7 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;
 
 
 
