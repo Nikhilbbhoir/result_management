@@ -56,7 +56,7 @@ export default function RegisterForm(){
       </div>
 
       <div className="mb-5">
-        <label htmlFor="fathername">Father's Name</label>
+        <label htmlFor="fathername">Father Name</label>
         <input
           type="text"  
           name="fathername"
