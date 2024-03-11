@@ -6,30 +6,59 @@ const token = async()=>{
   const tdata = await cookies()
   const token = tdata.get('token')
   // console.log(token.value);
-  const payload = Jwt.verify(token.value, process.env.SECRET_KEY);
-  const id = payload.id
-  // console.log(id);
-  return id
+  if(token){
+    const payload = Jwt.verify(token.value, process.env.SECRET_KEY);
+    const id = payload.id
+    // console.log(id);
+    return id
+  }
+  else{
+    return null
+  }
 }
 async function getdata(id){
   let data = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/result`,{cache:"no-cache"})
-  data = await data.json();
-  const filter = data.data.filter((item)=>item.user._id == id)
-  // console.log(filter);
-  return filter
+  if(data){
+    data = await data.json();
+    const filter = data.data.filter((item)=>item.user._id == id)
+    // console.log(filter);
+    return filter
+  }else{
+    const filter = [{
+      maths:0,
+      hindi:0,
+      sst:0,
+      eng:0,
+      sci:0
+    }]
+    return filter
+  }
 }
 
 const page = async() => {
   const id = await token()
-  // console.log(id)
+  console.log(id)
   const datafinal = await getdata(id)
-  const data = datafinal[0]
-  // console.log(data);
+  let data = []
+  data = datafinal[0]
+  console.log(data);
+  if(!data){
+    data ={
+      maths:0,
+      hindi:0,
+      sst:0,
+      eng:0,
+      sci:0
+    };
+    return data= data[0]
+  }
+  
   
   const total = data.maths + data.sst + data.hindi +data.sci + data.eng
   const condition = data.maths>=35 && data.sci>=35 && data.sst>=35 && data.hindi>=35 && data.eng>=35 
   return (
     <div className="bg-gray-100 min-h-screen">
+      { data  ? <p>Loading users...</p> : <p className="text-red-500">r</p> }
       <main className="container mx-auto py-12 px-4">
         <h2 className="bg-zinc-800 text-white text-center  py-2">Welcome to Dashboard</h2>
           <div className="flex justify-center bg-white rounded-lg shadow px-4 py-6">
@@ -127,7 +156,7 @@ const page = async() => {
                 {condition &&
                 <tr>
                   <th className="border p-2" colSpan={2}>Percentage</th>
-                  <td className="border p-2" colSpan={2}>{(total/500)*100}</td>
+                  <td className="border p-2" colSpan={2}>{(total/500)*100}%gjj</td>
                 </tr>}
                 <tr>
                   <th className="border p-2" colSpan={2}>Status(Pass or Fail)</th>

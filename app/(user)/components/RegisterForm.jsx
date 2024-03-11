@@ -1,8 +1,9 @@
 'use client'
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 export default function RegisterForm(){
-
+  const router = useRouter();
   const [formData, setFormData] = useState({
     name: '',
     fathername: '',
@@ -36,6 +37,7 @@ export default function RegisterForm(){
     })
     data = await data.json();
     alert(data.message)
+    router.push('/')
   }
 
 
