@@ -1,6 +1,5 @@
 import Connect from "@/app/db/Connect"
 import Result from "@/app/db/models/Result";
-import { ReducerType } from "@reduxjs/toolkit";
 import { NextResponse } from "next/server";
 
 export const GET =async()=>{
