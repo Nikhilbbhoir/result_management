@@ -156,7 +156,7 @@ const page = async() => {
                 {condition &&
                 <tr>
                   <th className="border p-2" colSpan={2}>Percentage</th>
-                  <td className="border p-2" colSpan={2}>{(total/500)*100}%gjj</td>
+                  <td className="border p-2" colSpan={2}>{(total/500)*100}%</td>
                 </tr>}
                 <tr>
                   <th className="border p-2" colSpan={2}>Status(Pass or Fail)</th>

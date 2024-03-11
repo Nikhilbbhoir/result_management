@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 const Logout = () => {
   const router = useRouter();
   const logout = async()=> {
-    let data = await fetch(process.env.NEXT_PUBLIC_BASE_URL+'/api/admin/logout')
+    let data = await fetch('/api/admin/logout')
     data = await  data.json()
     if(data.success){
       alert(data.message)

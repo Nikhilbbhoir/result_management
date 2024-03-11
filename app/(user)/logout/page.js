@@ -9,7 +9,7 @@ const Logout = async() => {
   const log = async() =>{
     // e.preventDefault();
   
-    let data = await fetch(process.env.NEXT_PUBLIC_BASE_URL+'/api/user/logout')
+    let data = await fetch('/api/user/logout')
     console.log(data);
     if(data){
       alert("Logout Successfully!!");
