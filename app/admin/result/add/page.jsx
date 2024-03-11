@@ -1,5 +1,5 @@
 'use client'
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import Form from '../../components/ResultForm';
 
 const Page = () => {
@@ -28,7 +28,7 @@ const Page = () => {
   }, []);
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <div className='flex items-center justify-center h-screen text-7xl'>Loading...</div>;
   }
 
   if (error) {

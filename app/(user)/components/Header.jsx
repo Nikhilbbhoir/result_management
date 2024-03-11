@@ -1,5 +1,10 @@
+// 'use server'
+import Logout from '@/app/admin/components/Logout';
+import { cookies } from 'next/headers';
 import Link from 'next/link';
 import React from 'react';
+
+
 
 const Header = () => {
   return (
@@ -11,6 +16,8 @@ const Header = () => {
         <Link href="/">Home</Link>
         <Link href="/">Login</Link>
           <Link href="/register">Register</Link>
+          {/* <Logout /> */}
+          <Link href="/logout">Logout</Link>
         {/* Add login and register links based on user authentication status */}
         {/** Replace with logic to check user authentication */}
         { /* Use NextAuth.js or other auth providers */}

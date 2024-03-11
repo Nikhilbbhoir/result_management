@@ -46,9 +46,12 @@ const ManageUsers = () => {
   };
 
   return (
-    <div className="container mx-auto py-4">
+    <div className="container overflow-auto mx-auto py-4">
       {isLoading ? (
         <p>Loading users...</p>
+        // <div className="h-5 w-5 border-red-500">
+          
+        // </div>
       ) : error ? (
         <p className="text-red-500">{error}</p>
       ) : (

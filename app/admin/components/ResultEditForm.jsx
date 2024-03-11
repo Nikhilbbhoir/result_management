@@ -1,10 +1,11 @@
 'use client'
 import { useRouter } from 'next/navigation';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
-const Form = ({ initialData = {}, onSubmit, users }) => {
+const EditForm =({ initialData = {}, onSubmit, users,id }) => {
   const router = useRouter();
   const [formData, setFormData] = useState(initialData);
+  const [result, setResult] = useState([]);
 
   const handleChange = (event) => {
     setFormData({ ...formData, [event.target.name]: event.target.value });
@@ -14,16 +15,8 @@ const Form = ({ initialData = {}, onSubmit, users }) => {
     event.preventDefault();
     // Simulate data submission (no actual API call)
     console.log('Form submitted:',formData);
-    let cid = await fetch('/api/user/'+formData.user);
-    cid = await cid.json();
-    console.log(cid);
-    if(cid.data._id  == formData.user){
-      alert("Result already added")
-    }
-    else{
-
-    let data = await fetch('/api/result',{
-      method:"POST",
+    let data = await fetch('/api/result/'+ id,{
+      method:"PUT",
       headers:{
         "Content-Type": "application/json"
       },
@@ -31,10 +24,33 @@ const Form = ({ initialData = {}, onSubmit, users }) => {
     })
     data = await data.json();
     console.log('Form submitted:',data);
-    alert(data.message)
-    // router.push('/admin')
-  }
+    if(data){
+      alert(data.message)
+      // console.log(data)
+      router.push('/admin')
+    }else{
+      alert("Some Error Occured")
+    }
+    // You can clear form or display a success message here
   };
+  const curr_id = id;
+  // console.log("URL Id" + curr_id);
+
+  const getData = async()=>{
+    let data = await fetch(`/api/result/${curr_id}`);
+    data = await data.json()
+    console.log(data.data.user.name)
+    if(!data){
+      alert("No Data Found")
+    }
+    setResult(data.data)
+  }
+  useEffect(()=>{
+    getData()
+  }, [])
+  
+    // const name =result.user.name || "";
+    console.log(result);
 
   return (
     <div className="flex flex-col">
@@ -50,10 +66,8 @@ const Form = ({ initialData = {}, onSubmit, users }) => {
           onChange={handleChange}
           className="px-3 py-2 rounded-md border border-gray-300 focus:outline-none focus:border-sky-500"
         >
-          <option value="">Select Student</option>
           {
-            users.map((value,index)=><option key={index} value={value._id}>{value.name}</option>)
-            
+            <option value={result._id}>{result.user ? result.user.name : "Getting Details..." }</option>
           }
         </select>
       </div>
@@ -63,7 +77,8 @@ const Form = ({ initialData = {}, onSubmit, users }) => {
           type="text"
           id="sci"
           name="sci"
-          value={formData.sci || ''}
+          // value={result.sci}
+          value={formData.sci || result.sci || ''}
           onChange={handleChange}
           className="px-3 py-2 rounded-md border border-gray-300 focus:outline-none focus:border-sky-500"
         />
@@ -74,7 +89,7 @@ const Form = ({ initialData = {}, onSubmit, users }) => {
           type="text"
           id="eng"
           name="eng"
-          value={formData.eng || ''}
+          value={formData.eng || result.eng  || ''}
           onChange={handleChange}
           className="px-3 py-2 rounded-md border border-gray-300 focus:outline-none focus:border-sky-500"
         />
@@ -85,7 +100,7 @@ const Form = ({ initialData = {}, onSubmit, users }) => {
           type="text"
           id="hindi"
           name="hindi"
-          value={formData.hindi || ''}
+          value={formData.hindi || result.hindi  || ''}
           onChange={handleChange}
           className="px-3 py-2 rounded-md border border-gray-300 focus:outline-none focus:border-sky-500"
         />
@@ -96,7 +111,7 @@ const Form = ({ initialData = {}, onSubmit, users }) => {
           type="text"
           id="maths"
           name="maths"
-          value={formData.maths || ''}
+          value={formData.maths || result.maths  || ''}
           onChange={handleChange}
           className="px-3 py-2 rounded-md border border-gray-300 focus:outline-none focus:border-sky-500"
         />
@@ -107,7 +122,7 @@ const Form = ({ initialData = {}, onSubmit, users }) => {
           type="text"
           id="sst"
           name="sst"
-          value={formData.sst || ''}
+          value={formData.sst || result.sst  || ''}
           onChange={handleChange}
           className="px-3 py-2 rounded-md border border-gray-300 focus:outline-none focus:border-sky-500"
         />
@@ -120,4 +135,4 @@ const Form = ({ initialData = {}, onSubmit, users }) => {
   );
 };
 
-export default Form;
+export default EditForm;

@@ -1,7 +1,9 @@
 'use client'
+import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
 
 const LoginForm = () => {
+  const router = useRouter();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
@@ -22,6 +24,7 @@ const LoginForm = () => {
       const data = await response.json();
 
       alert(data.message)
+      router.push('/admin')
   
   };
 

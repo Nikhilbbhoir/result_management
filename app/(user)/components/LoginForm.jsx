@@ -1,8 +1,10 @@
 'use client'
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 // pages/Login.js
 const Login = () => {
+  const router = useRouter();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
@@ -20,6 +22,7 @@ const Login = () => {
     data = await data.json();
     console.log(data);
     alert(data.message)
+    router.push("/dashboard")
   };
 
   return (

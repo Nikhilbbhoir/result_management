@@ -25,7 +25,7 @@ export const POST = async(req)=>{
             id:user._id,
             email: user.email
         }
-        const token = await JWT.sign(tokenData, process.env.SECRET_KEY, {expiresIn:"1h"})
+        const token = JWT.sign(tokenData, process.env.SECRET_KEY, {expiresIn:"1h"})
         const response = NextResponse.json({message:"Login Success",success:true})
 
         response.cookies.set("token",token,{
@@ -37,3 +37,4 @@ export const POST = async(req)=>{
         return NextResponse.json({message: error.message})
     }
 }
+

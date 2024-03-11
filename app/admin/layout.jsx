@@ -9,7 +9,7 @@ export default function AdminLayout({ children }) {
     <html lang="en">
       <body className={inter.className}>
         <Header />
-        <div className="flex h-screen">
+        <div className="flex bg-gray-100 h-screen">
         <div className="w-64 bg-gray-800 text-white p-4">
         <ul>
           <li>

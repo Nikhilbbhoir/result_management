@@ -3,9 +3,7 @@ import AdminPanel from '../../components/AdminTable'
 
 const page = () => {
   return (
-    <div>
       <AdminPanel />
-    </div>
   )
 }
 
