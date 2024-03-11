@@ -21,12 +21,13 @@ async function getdata(id){
 
 const page = async() => {
   const id = await token()
-  console.log(id)
+  // console.log(id)
   const datafinal = await getdata(id)
   const data = datafinal[0]
-  console.log(data);
+  // console.log(data);
   
   const total = data.maths + data.sst + data.hindi +data.sci + data.eng
+  const condition = data.maths>=35 && data.sci>=35 && data.sst>=35 && data.hindi>=35 && data.eng>=35 
   return (
     <div className="bg-gray-100 min-h-screen">
       <main className="container mx-auto py-12 px-4">
@@ -123,13 +124,17 @@ const page = async() => {
                   <th className="border p-2" colSpan={2}>Marks Obtained</th>
                   <td className="border p-2" colSpan={2}>{total}</td>
                 </tr>
+                {condition &&
                 <tr>
                   <th className="border p-2" colSpan={2}>Percentage</th>
                   <td className="border p-2" colSpan={2}>{(total/500)*100}</td>
-                </tr>
+                </tr>}
                 <tr>
                   <th className="border p-2" colSpan={2}>Status(Pass or Fail)</th>
-                  <td className="border p-2" colSpan={2}>{data.maths>=35 && data.sci>=35 && data.sst>=35 && data.hindi>=35 && data.eng>=35 ? <h1 className="text-green-700">Pass</h1> : <h1 className="text-red-700">Fail</h1> }</td>
+                  <td className="border p-2" colSpan={2}>
+                  {condition
+                  ? <h1 className="text-green-700">Pass</h1> 
+                  : <h1 className="text-red-700">Fail</h1> }</td>
                 </tr>
               </thead>
 
