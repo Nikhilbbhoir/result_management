@@ -2,17 +2,15 @@
 import Jwt from "jsonwebtoken";
 import { cookies } from "next/headers";
 
-function token(){
-  const tdata = cookies()
+const token = async()=>{
+  const tdata = await cookies()
   const token = tdata.get('token')
   // console.log(token.value);
   const payload = Jwt.verify(token.value, process.env.SECRET_KEY);
   const id = payload.id
   // console.log(id);
   return id
-  // getdata(id)
 }
-token()
 async function getdata(id){
   let data = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/result`,{cache:"no-cache"})
   data = await data.json();
@@ -23,7 +21,6 @@ async function getdata(id){
 
 const page = async() => {
   const id = await token()
-  // console.log("This is page " +id);
   const datafinal = await getdata(id)
   const data = datafinal[0]
   console.log(data);
