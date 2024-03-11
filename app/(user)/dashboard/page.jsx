@@ -21,6 +21,7 @@ async function getdata(id){
 
 const page = async() => {
   const id = await token()
+  console.log(id)
   const datafinal = await getdata(id)
   const data = datafinal[0]
   console.log(data);

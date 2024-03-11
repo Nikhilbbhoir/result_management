@@ -13,11 +13,16 @@ const Form = ({ initialData = {}, onSubmit, users }) => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     // Simulate data submission (no actual API call)
-    console.log('Form submitted:',formData);
-    let cid = await fetch('/api/user/'+formData.user);
+    // console.log('Form submitted:',formData);
+    let cid = await fetch('/api/result/');
     cid = await cid.json();
-    console.log(cid);
-    if(cid.data._id  == formData.user){
+    cid = cid.data
+    let filter = cid.filter((item)=>item.user._id===formData.user)
+    filter= filter[0];
+    // console.log(cid);
+    // console.log(filter);
+    
+    if(filter && filter.user._id  === formData.user){
       alert("Result already added")
     }
     else{

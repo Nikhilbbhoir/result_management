@@ -29,6 +29,6 @@ export function middleware(request) {
 // See "Matching Paths" below to learn more
 export const config = {
   matcher: ['/','/register','/dashboard','/logout',
-  '/admin','/admin/login','/admin/register','/admin/logout'
+  '/admin','/admin/result/manage','/admin/user','/admin/login','/admin/register','/admin/logout'
 ],
 }
